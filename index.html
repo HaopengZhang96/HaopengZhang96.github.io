@@ -294,73 +294,12 @@
 
             
 
-            <p class="toc-button" id="toc-button">目录</p>
-<div id="toc" class="toc-article" style="display:none;">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#trec-2019-fair-ranking-track"><span class="toc-number">1.</span> <span class="toc-text">trec 2019 fair ranking track</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Protocol"><span class="toc-number">1.1.</span> <span class="toc-text">1 Protocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Evaluation"><span class="toc-number">1.2.</span> <span class="toc-text">2 Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Measuring-Fairness"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 Measuring Fairness</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 Measuring Author Exposure for a Single Ranking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 Measuring Author Relevance for a Single Ranking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-Measuring-Group-Fairness"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">2.1.3 Measuring Group Fairness</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Measuring-Relevance"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 Measuring Relevance</span></a></li></ol></li></ol></li></ol>
-</div>
-<script>
-    $(function(){
-
-        var width = document.body.scrollWidth;
-        if (width <=550) {
-             $(".toc-button").css("display","none");
-        }
-        $(".toc-button").hover(function(){
-            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
-            $(".toc-article").css({
-                top:top +"px"
-            });
-            $("#toc").show(1000,function(){});
-           // $("#toc").animate({width:500;},3000);
-        },function(){
-
-        });
-        $(".toc-article").hover(function(){
-
-        },function(){
-            $("#toc").hide(1000,function(){});
-        });
-    })
-</script>
-
-            
             
 
             
             <h1 id="trec-2019-fair-ranking-track"><a href="#trec-2019-fair-ranking-track" class="headerlink" title="trec 2019 fair ranking track"></a>trec 2019 fair ranking track</h1><hr>
 <p>&#160;&#160;&#160;&#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。</p>
 <h2 id="1-Protocol"><a href="#1-Protocol" class="headerlink" title="1 Protocol"></a>1 Protocol</h2><p>&#160;&#160;&#160;&#160;会给定一个query集合Q，其中$q\in Q$。对于每个请求，会有一个query q和一个文档集合$D_q$。你需要做的就是根据q来重排序(rerank)$D_q$,重排序结果是$\pi$。最后把每一个请求都处理完返回$\pi$的集合的$\Pi$。过程如下：</p>
-<p>Algorithm 1 Evaluation protocol</p>
-<hr>
-<p>$\Pi$&larr;{}<br>for q,$D_q\in Q$ do<br>    $\pi$&larr;SYSTEM(q,$D_q$)<br>    $\Pi$&larr;$\Pi+[\pi]$<br>end for<br>return $\Pi$</p>
-<hr>
-<h2 id="2-Evaluation"><a href="#2-Evaluation" class="headerlink" title="2 Evaluation"></a>2 Evaluation</h2><p>&#160;&#160;&#160;&#160;衡量指标主要分为两部分，相关性(revelance)和公平性(fairness)。<br>&#160;&#160;&#160;&#160;所谓相关性就是document和query的相关性，公平性主要为Author Exposure即论文作者的曝光度。<br>&#160;&#160;&#160;&#160;先介绍如何衡量作者的曝光度：</p>
-<h3 id="2-1-Measuring-Fairness"><a href="#2-1-Measuring-Fairness" class="headerlink" title="2.1 Measuring Fairness"></a>2.1 Measuring Fairness</h3><h4 id="2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking"><a href="#2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking" class="headerlink" title="2.1.1 Measuring Author Exposure for a Single Ranking"></a>2.1.1 Measuring Author Exposure for a Single Ranking</h4><p>&#160;&#160;&#160;&#160;先为单个请求的重排序结果$\pi$计算作者的曝光度，某个作者a，在结果$\pi$的曝光度计算如下：</p>
-<script type="math/tex; mode=display">e_a^\pi=\sum^n_{i=1}[\gamma^{i-1}\Pi^{i-1}_{j=1}(1-p(s|\pi_j))]I(\pi_i\in D_a)</script><p>&#160;&#160;&#160;&#160;其中$\gamma$是一个给定的常数，$\gamma^{i-1}$用于表示排序后的document从上到下逐渐衰减的重要程度。$p(s|\pi_j)$表示用户看到排序的第j篇文档停下来的概率，该track假设用户停止的概率$p(s|\pi_j)$=$f(r_d)$,$f(r_d)$是用户被满足的概率，$r_d$是document和query的相关程度，f是一个单调函数。这代表着，document与query相关度越高，用户越容易被满足，所以停下来不再阅读。<br>&#160;&#160;&#160;&#160;$I(\pi_i\in D_a)$是指示函数，当第i篇文档属于作者a，该函数值为1，否则为0。$e^\pi_a$是排序$\pi$中作者a的曝光度(exposure)。<br>&#160;&#160;&#160;&#160;那么在所有结果中，作者a的曝光度如下：</p>
-<script type="math/tex; mode=display">e_a=\sum_{\pi\in \Pi}e^\pi_a</script><h4 id="2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking"><a href="#2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking" class="headerlink" title="2.1.2 Measuring Author Relevance for a Single Ranking"></a>2.1.2 Measuring Author Relevance for a Single Ranking</h4><p>&#160;&#160;&#160;&#160;上一节是衡量对于作者的曝光度，这一节主要考虑作者的相关性。什么叫作者的相关性呢，它是衡量作者论文在排序中的相关性之和，也就是对作者论文重要性的考量。</p>
-<script type="math/tex; mode=display">r^\pi_a=\sum_{d\in D_a}p(s|d)</script><p>&#160;&#160;&#160;&#160;$r_a^\pi$是排序$\pi$中作者a所有文章相关性的求和。</p>
-<h4 id="2-1-3-Measuring-Group-Fairness"><a href="#2-1-3-Measuring-Group-Fairness" class="headerlink" title="2.1.3 Measuring Group Fairness"></a>2.1.3 Measuring Group Fairness</h4><p>&#160;&#160;&#160;&#160;上面给出了单个作者的exposure和relevance，每个作者都有从属于的group，按group累加作者的fairness以及relevance就能分别得到group的exposure和relevance。</p>
-<script type="math/tex; mode=display">\epsilon_g=\frac{\sum_{a\in A_g}e_a}{\sum_{g'\in G}\sum_{a\in A_{g'}}e_a}</script><script type="math/tex; mode=display">R_g=\frac{\sum_{a\in A_g}r_a}{\sum_{g'\in G}\sum_{a\in A_{g'}}r_a}</script><p>&#160;&#160;&#160;&#160;所谓公平，就是让不同group的$\epsilon_g$和$R_g$差距尽可能一致。</p>
-<script type="math/tex; mode=display">\Delta_g=|\epsilon_g-R_g|</script><p>&#160;&#160;&#160;最后对所有group求一个Gini coefficient</p>
-<p>$\Delta=\frac{\sum_{g,g’\in G}|\Delta_g-\Delta_{g’}|}{2|G|\sum_{g\in G}\Delta_g}$</p>
-<h3 id="2-2-Measuring-Relevance"><a href="#2-2-Measuring-Relevance" class="headerlink" title="2.2 Measuring Relevance"></a>2.2 Measuring Relevance</h3><p>&#160;&#160;前面按group计算了exposure，这一节给出相关性$u_a^\pi$的计算。和$e_a^\pi$的公式几乎一样，就是把指示函数换成$p(s|\pi_i)$。</p>
-<script type="math/tex; mode=display">u_a^\pi=\sum^n_{i=1}[\gamma^{i-1}\Pi^{i-1}_{j=1}(1-p(s|\pi_j))]p(s|\pi_i)</script><script type="math/tex; mode=display">U=\frac{1}{\Pi}\sum_{\pi\in \Pi}u^\pi</script><p>2.3 Trading Off Fairness and Relevance</p>
-<p>&#160;&#160;&#160;&#160;按作者给的文档原话说，理论上fairness和relevance能够达到最优，但是实际操作上，可能往往提高fairness会降低relevance。所以最终要按一定比例寻求一个平衡。</p>
-
-            
-            </br>
-            <p>本文链接：
-                <a href="http://yoursite.com/2019/08/17/trec2019-fair-ranking-track/">
-                    http://yoursite.com/2019/08/17/trec2019-fair-ranking-track/
-                </a>
-            </p>
-            
-            <p>-- <acronym title="End of File">EOF</acronym> --</p>
-
-            <div class="post-info">
-
-                <p>转载请注明出处 署名-非商业性使用-禁止演绎 3.0 国际（CC BY-NC-ND 3.0）</p>
-            </div>
             
         </div>
 
@@ -373,11 +312,13 @@
 
 
             
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
 
-
+            
+            <p class="article-more-link">
+                <a  href="
+                    /2019/08/17/trec2019-fair-ranking-track/#more">
+                    More >></a>
+            </p>
             
             <div class="clearfix"></div>
         </div>
@@ -619,6 +560,29 @@
 
 
 
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
 <div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;z-index:9999;opacity: 100%;">
     <a title="返回顶部" style="opacity: 100%;">
         <img src="/img/scrollup.png" />
@@ -643,7 +607,9 @@
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -660,7 +626,5 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo-inject:end --></body>
 </html>
