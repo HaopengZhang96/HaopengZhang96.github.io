@@ -7,20 +7,19 @@
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
   -->
   
-  <title>trec2019 fair ranking track | HaopengZhang&#39;s blog</title>
+  <title>Hello World | HaopengZhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="trec 2019 fair ranking track &amp;#160;&amp;#160;&amp;#160;&amp;#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。 1 Protocol&amp;#160;&amp;#160;&amp;#160;&amp;#160;会给定一个query集合Q，其中$q\in Q$。对于每个请">
-<meta name="keywords" content="trec IR">
+  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:type" content="article">
-<meta property="og:title" content="trec2019 fair ranking track">
-<meta property="og:url" content="http://yoursite.com/2019/08/17/trec2019-fair-ranking-track/index.html">
+<meta property="og:title" content="Hello World">
+<meta property="og:url" content="http://yoursite.com/2019/08/16/hello-world/index.html">
 <meta property="og:site_name" content="HaopengZhang&#39;s blog">
-<meta property="og:description" content="trec 2019 fair ranking track &amp;#160;&amp;#160;&amp;#160;&amp;#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。 1 Protocol&amp;#160;&amp;#160;&amp;#160;&amp;#160;会给定一个query集合Q，其中$q\in Q$。对于每个请">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-17T11:13:40.788Z">
+<meta property="og:updated_time" content="2019-08-16T09:17:04.152Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="trec2019 fair ranking track">
-<meta name="twitter:description" content="trec 2019 fair ranking track &amp;#160;&amp;#160;&amp;#160;&amp;#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。 1 Protocol&amp;#160;&amp;#160;&amp;#160;&amp;#160;会给定一个query集合Q，其中$q\in Q$。对于每个请">
+<meta name="twitter:title" content="Hello World">
+<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
   
     <link rel="alternative" href="/atom.xml" title="HaopengZhang&#39;s blog" type="application/atom+xml">
   
@@ -250,7 +249,7 @@
 	
 </div>
 
-      <div class="body-wrap"><article id="post-trec2019-fair-ranking-track" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
     <script>
         $("html").niceScroll({
             cursorcolor: "#2a2929",
@@ -264,8 +263,8 @@
     </script>
     
     <div class="article-meta">
-        <a href="/2019/08/17/trec2019-fair-ranking-track/" class="article-date">
-  	<time datetime="2019-08-17T07:22:06.000Z" itemprop="datePublished">2019-08-17</time>
+        <a href="/2019/08/16/hello-world/" class="article-date">
+  	<time datetime="2019-08-16T09:17:04.152Z" itemprop="datePublished">2019-08-16</time>
 </a>
 
     </div>
@@ -279,7 +278,7 @@
             
   
     <h1 class="article-title" itemprop="name">
-      trec2019 fair ranking track
+      Hello World
     </h1>
   
 
@@ -288,16 +287,8 @@
         
         <div class="article-info article-info-post">
             
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/trec-IR/">trec IR</a></li></ul>
-	</div>
-
 
             
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
 
             <div class="clearfix"></div>
         </div>
@@ -310,7 +301,7 @@
 
             <p class="toc-button" id="toc-button">目录</p>
 <div id="toc" class="toc-article" style="display:none;">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#trec-2019-fair-ranking-track"><span class="toc-number">1.</span> <span class="toc-text">trec 2019 fair ranking track</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Protocol"><span class="toc-number">1.1.</span> <span class="toc-text">1 Protocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Evaluation"><span class="toc-number">1.2.</span> <span class="toc-text">2 Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Measuring-Fairness"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 Measuring Fairness</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 Measuring Author Exposure for a Single Ranking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 Measuring Author Relevance for a Single Ranking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-Measuring-Group-Fairness"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">2.1.3 Measuring Group Fairness</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Measuring-Relevance"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 Measuring Relevance</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
 </div>
 <script>
     $(function(){
@@ -341,31 +332,21 @@
             
 
             
-            <h1 id="trec-2019-fair-ranking-track"><a href="#trec-2019-fair-ranking-track" class="headerlink" title="trec 2019 fair ranking track"></a>trec 2019 fair ranking track</h1><hr>
-<p>&#160;&#160;&#160;&#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。</p>
-<h2 id="1-Protocol"><a href="#1-Protocol" class="headerlink" title="1 Protocol"></a>1 Protocol</h2><p>&#160;&#160;&#160;&#160;会给定一个query集合Q，其中$q\in Q$。对于每个请求，会有一个query q和一个文档集合$D_q$。你需要做的就是根据q来重排序(rerank)$D_q$,重排序结果是$\pi$。最后把每一个请求都处理完返回$\pi$的集合的$\Pi$。过程如下：</p>
-<p>Algorithm 1 Evaluation protocol</p>
-<hr>
-<p>$\Pi$&larr;{}<br>for q,$D_q\in Q$ do<br>    $\pi$&larr;SYSTEM(q,$D_q$)<br>    $\Pi$&larr;$\Pi+[\pi]$<br>end for<br>return $\Pi$</p>
-<hr>
-<h2 id="2-Evaluation"><a href="#2-Evaluation" class="headerlink" title="2 Evaluation"></a>2 Evaluation</h2><p>&#160;&#160;&#160;&#160;衡量指标主要分为两部分，相关性(revelance)和公平性(fairness)。<br>&#160;&#160;&#160;&#160;所谓相关性就是document和query的相关性，公平性主要为Author Exposure即论文作者的曝光度。<br>&#160;&#160;&#160;&#160;先介绍如何衡量作者的曝光度：</p>
-<h3 id="2-1-Measuring-Fairness"><a href="#2-1-Measuring-Fairness" class="headerlink" title="2.1 Measuring Fairness"></a>2.1 Measuring Fairness</h3><h4 id="2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking"><a href="#2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking" class="headerlink" title="2.1.1 Measuring Author Exposure for a Single Ranking"></a>2.1.1 Measuring Author Exposure for a Single Ranking</h4><p>&#160;&#160;&#160;&#160;先为单个请求的重排序结果$\pi$计算作者的曝光度，某个作者a，在结果$\pi$的曝光度计算如下：</p>
-<script type="math/tex; mode=display">e_a^\pi=\sum^n_{i=1}[\gamma^{i-1}\Pi^{i-1}_{j=1}(1-p(s|\pi_j))]I(\pi_i\in D_a)</script><p>&#160;&#160;&#160;&#160;其中$\gamma$是一个给定的常数，$\gamma^{i-1}$用于表示排序后的document从上到下逐渐衰减的重要程度。$p(s|\pi_j)$表示用户看到排序的第j篇文档停下来的概率，该track假设用户停止的概率$p(s|\pi_j)$=$f(r_d)$,$f(r_d)$是用户被满足的概率，$r_d$是document和query的相关程度，f是一个单调函数。这代表着，document与query相关度越高，用户越容易被满足，所以停下来不再阅读。<br>&#160;&#160;&#160;&#160;$I(\pi_i\in D_a)$是指示函数，当第i篇文档属于作者a，该函数值为1，否则为0。$e^\pi_a$是排序$\pi$中作者a的曝光度(exposure)。<br>&#160;&#160;&#160;&#160;那么在所有结果中，作者a的曝光度如下：</p>
-<script type="math/tex; mode=display">e_a=\sum_{\pi\in \Pi}e^\pi_a</script><h4 id="2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking"><a href="#2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking" class="headerlink" title="2.1.2 Measuring Author Relevance for a Single Ranking"></a>2.1.2 Measuring Author Relevance for a Single Ranking</h4><p>&#160;&#160;&#160;&#160;上一节是衡量对于作者的曝光度，这一节主要考虑作者的相关性。什么叫作者的相关性呢，它是衡量作者论文在排序中的相关性之和，也就是对作者论文重要性的考量。</p>
-<script type="math/tex; mode=display">r^\pi_a=\sum_{d\in D_a}p(s|d)</script><p>&#160;&#160;&#160;&#160;$r_a^\pi$是排序$\pi$中作者a所有文章相关性的求和。</p>
-<h4 id="2-1-3-Measuring-Group-Fairness"><a href="#2-1-3-Measuring-Group-Fairness" class="headerlink" title="2.1.3 Measuring Group Fairness"></a>2.1.3 Measuring Group Fairness</h4><p>&#160;&#160;&#160;&#160;上面给出了单个作者的exposure和relevance，每个作者都有从属于的group，按group累加作者的fairness以及relevance就能分别得到group的exposure和relevance。</p>
-<script type="math/tex; mode=display">\epsilon_g=\frac{\sum_{a\in A_g}e_a}{\sum_{g'\in G}\sum_{a\in A_{g'}}e_a}</script><script type="math/tex; mode=display">R_g=\frac{\sum_{a\in A_g}r_a}{\sum_{g'\in G}\sum_{a\in A_{g'}}r_a}</script><p>&#160;&#160;&#160;&#160;所谓公平，就是让不同group的$\epsilon_g$和$R_g$差距尽可能一致。</p>
-<script type="math/tex; mode=display">\Delta_g=|\epsilon_g-R_g|</script><p>&#160;&#160;&#160;最后对所有group求一个Gini coefficient</p>
-<p>$\Delta=\frac{\sum_{g,g’\in G}|\Delta_g-\Delta_{g’}|}{2|G|\sum_{g\in G}\Delta_g}$</p>
-<h3 id="2-2-Measuring-Relevance"><a href="#2-2-Measuring-Relevance" class="headerlink" title="2.2 Measuring Relevance"></a>2.2 Measuring Relevance</h3><p>&#160;&#160;前面按group计算了exposure，这一节给出相关性$u_a^\pi$的计算。和$e_a^\pi$的公式几乎一样，就是把指示函数换成$p(s|\pi_i)$。</p>
-<script type="math/tex; mode=display">u_a^\pi=\sum^n_{i=1}[\gamma^{i-1}\Pi^{i-1}_{j=1}(1-p(s|\pi_j))]p(s|\pi_i)</script><script type="math/tex; mode=display">U=\frac{1}{\Pi}\sum_{\pi\in \Pi}u^\pi</script><p>2.3 Trading Off Fairness and Relevance</p>
-<p>&#160;&#160;&#160;&#160;按作者给的文档原话说，理论上fairness和relevance能够达到最优，但是实际操作上，可能往往提高fairness会降低relevance。所以最终要按一定比例寻求一个平衡。</p>
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
             
             </br>
             <p>本文链接：
-                <a href="http://yoursite.com/2019/08/17/trec2019-fair-ranking-track/">
-                    http://yoursite.com/2019/08/17/trec2019-fair-ranking-track/
+                <a href="http://yoursite.com/2019/08/16/hello-world/">
+                    http://yoursite.com/2019/08/16/hello-world/
                 </a>
             </p>
             
@@ -435,11 +416,15 @@
         
 <nav id="article-nav">
   
-  
-    <a href="/2019/08/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
-      <strong class="article-nav-caption">></strong>
+    <a href="/2019/08/17/trec2019-fair-ranking-track/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          trec2019 fair ranking track
+        
+      </div>
     </a>
+  
   
 </nav>
 
