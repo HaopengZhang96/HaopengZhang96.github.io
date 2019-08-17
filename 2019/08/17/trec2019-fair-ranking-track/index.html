@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta name="baidu-site-verification" content="6fea7fc7276fc383ec5b2080c662f076">
+  <!--
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  -->
+  
+  <title>trec2019 fair ranking track | HaopengZhang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="trec 2019 fair ranking track &amp;#160;&amp;#160;&amp;#160;&amp;#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。 1 Protocol&amp;#160;&amp;#160;&amp;#160;&amp;#160;会给定一个query集合Q，其中$q\in Q$。对于每个请">
+<meta name="keywords" content="trec IR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="trec2019 fair ranking track">
+<meta property="og:url" content="http://yoursite.com/2019/08/17/trec2019-fair-ranking-track/index.html">
+<meta property="og:site_name" content="HaopengZhang&#39;s blog">
+<meta property="og:description" content="trec 2019 fair ranking track &amp;#160;&amp;#160;&amp;#160;&amp;#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。 1 Protocol&amp;#160;&amp;#160;&amp;#160;&amp;#160;会给定一个query集合Q，其中$q\in Q$。对于每个请">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-17T08:53:13.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="trec2019 fair ranking track">
+<meta name="twitter:description" content="trec 2019 fair ranking track &amp;#160;&amp;#160;&amp;#160;&amp;#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。 1 Protocol&amp;#160;&amp;#160;&amp;#160;&amp;#160;会给定一个query集合Q，其中$q\in Q$。对于每个请">
+  
+    <link rel="alternative" href="/atom.xml" title="HaopengZhang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-1.8.1.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+  <script src="/js/search.js"></script>
+  <script src="/js/ug-theme-default.js"></script>
+  <script src="/js/unitegallery.js"></script>
+  <script src="/js/av.min.js"></script>
+  <script src="/js/valine.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="http://kiritor.github.io/img/lcore.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/" class="alluraregular">HaopengZhang</a></h1>
+		</hgroup>
+        <!--
+		
+        -->
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/categories/front">前端开发</a></li>
+				        
+							<li><a href="/categories/work">工作日志</a></li>
+				        
+							<li><a href="/categories/life">低吟浅谈</a></li>
+				        
+							<li><a href="/resume">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Kiritor" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/3206206100/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/kiritor" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/trec-IR/" style="font-size: 10px;">trec IR</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+			</div>
+		</div>
+	</header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">HaopengZhang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://kiritor.github.io/img/lcore.jpg" class="js-avatar">
+				<hgroup>
+				  <h1 class="header-author">HaopengZhang</h1>
+				</hgroup>
+			</div>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/categories/front">前端开发</a></li>
+		        
+					<li><a href="/categories/work">工作日志</a></li>
+		        
+					<li><a href="/categories/life">低吟浅谈</a></li>
+		        
+					<li><a href="/resume">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Kiritor" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/3206206100/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/kiritor" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+
+	  <div class="page-header" style="">
+	<!--是否开启站内搜索-->
+	
+	<span class="local-search local-search-google local-search-plugin" style="float:right;">
+  <input type="search" placeholder="Search..." id="local-search-input" class="local-search-input-cls" style="">
+  <!--<i class="icon" aria-hidden="true" title="Search"></i>-->
+  <div id="local-search-result" class="local-search-result-cls"></div>
+</span>
+
+<script>
+    var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
+	
+	
+	if(isMobile.any()){
+	    //手机端取消搜索功能
+		$('.local-search').css("display","none");
+	}
+	
+	$(".local-search").on('input porpertychange',function(){
+		
+		//searchFunc("/search.xml", 'local-search-input', 'local-search-result');
+		
+	});
+    
+    if ($('.local-search').size() && !isMobile.any()) {
+        searchFunc("/search.xml", 'local-search-input', 'local-search-result');
+    }
+	
+</script>
+
+	
+	<!--是否开启最近通知-->
+	
+	🍁砰砰在左边,你在砰砰里...
+
+
+	
+</div>
+
+      <div class="body-wrap"><article id="post-trec2019-fair-ranking-track" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+    <div class="article-meta">
+        <a href="/2019/08/17/trec2019-fair-ranking-track/" class="article-date">
+  	<time datetime="2019-08-17T07:22:06.000Z" itemprop="datePublished">2019-08-17</time>
+</a>
+
+    </div>
+    
+    <div class="article-inner">
+        
+        <input type="hidden" class="isFancy" />
+        
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      trec2019 fair ranking track
+    </h1>
+  
+
+
+        </header>
+        
+        <div class="article-info article-info-post">
+            
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/trec-IR/">trec IR</a></li></ul>
+	</div>
+
+
+            
+
+            <div class="clearfix"></div>
+        </div>
+        
+        
+
+        <div class="article-entry" itemprop="articleBody">
+
+            
+
+            <p class="toc-button" id="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#trec-2019-fair-ranking-track"><span class="toc-number">1.</span> <span class="toc-text">trec 2019 fair ranking track</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Protocol"><span class="toc-number">1.1.</span> <span class="toc-text">1 Protocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Evaluation"><span class="toc-number">1.2.</span> <span class="toc-text">2 Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Measuring-Fairness"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 Measuring Fairness</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 Measuring Author Exposure for a Single Ranking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 Measuring Author Relevance for a Single Ranking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-Measuring-Group-Fairness"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">2.1.3 Measuring Group Fairness</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Measuring-Relevance"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 Measuring Relevance</span></a></li></ol></li></ol></li></ol>
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+            
+            
+
+            
+            <h1 id="trec-2019-fair-ranking-track"><a href="#trec-2019-fair-ranking-track" class="headerlink" title="trec 2019 fair ranking track"></a>trec 2019 fair ranking track</h1><hr>
+<p>&#160;&#160;&#160;&#160;最近实验室要求参加trec 2019新出的track：fair ranking track。这里整理一下该任务的思想和要求。这次track主要为学术论文数据的排序。</p>
+<h2 id="1-Protocol"><a href="#1-Protocol" class="headerlink" title="1 Protocol"></a>1 Protocol</h2><p>&#160;&#160;&#160;&#160;会给定一个query集合Q，其中$q\in Q$。对于每个请求，会有一个query q和一个文档集合$D_q$。你需要做的就是根据q来重排序(rerank)$D_q$,重排序结果是$\pi$。最后把每一个请求都处理完返回$\pi$的集合的$\Pi$。过程如下：</p>
+<p>Algorithm 1 Evaluation protocol</p>
+<hr>
+<p>$\Pi$&larr;{}<br>for q,$D_q\in Q$ do<br>    $\pi$&larr;SYSTEM(q,$D_q$)<br>    $\Pi$&larr;$\Pi+[\pi]$<br>end for<br>return $\Pi$</p>
+<hr>
+<h2 id="2-Evaluation"><a href="#2-Evaluation" class="headerlink" title="2 Evaluation"></a>2 Evaluation</h2><p>&#160;&#160;&#160;&#160;衡量指标主要分为两部分，相关性(revelance)和公平性(fairness)。<br>&#160;&#160;&#160;&#160;所谓相关性就是document和query的相关性，公平性主要为Author Exposure即论文作者的曝光度。<br>&#160;&#160;&#160;&#160;先介绍如何衡量作者的曝光度：</p>
+<h3 id="2-1-Measuring-Fairness"><a href="#2-1-Measuring-Fairness" class="headerlink" title="2.1 Measuring Fairness"></a>2.1 Measuring Fairness</h3><h4 id="2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking"><a href="#2-1-1-Measuring-Author-Exposure-for-a-Single-Ranking" class="headerlink" title="2.1.1 Measuring Author Exposure for a Single Ranking"></a>2.1.1 Measuring Author Exposure for a Single Ranking</h4><p>&#160;&#160;&#160;&#160;先为单个请求的重排序结果$\pi$计算作者的曝光度，某个作者a，在结果$\pi$的曝光度计算如下：</p>
+<script type="math/tex; mode=display">e_a^\pi=\sum^n_{i=1}[\gamma^{i-1}\Pi^{i-1}_{j=1}(1-p(s|\pi_j))]I(\pi_i\in D_a)</script><p>&#160;&#160;&#160;&#160;其中$\gamma$是一个给定的常数，$\gamma^{i-1}$用于表示排序后的document从上到下逐渐衰减的重要程度。$p(s|\pi_j)$表示用户看到排序的第j篇文档停下来的概率，该track假设用户停止的概率$p(s|\pi_j)$=$f(r_d)$,$f(r_d)$是用户被满足的概率，$r_d$是document和query的相关程度，f是一个单调函数。这代表着，document与query相关度越高，用户越容易被满足，所以停下来不再阅读。<br>&#160;&#160;&#160;&#160;$I(\pi_i\in D_a)$是指示函数，当第i篇文档属于作者a，该函数值为1，否则为0。$e^\pi_a$是排序$\pi$中作者a的曝光度(exposure)。<br>&#160;&#160;&#160;&#160;那么在所有结果中，作者a的曝光度如下：</p>
+<script type="math/tex; mode=display">e_a=\sum_{\pi\in \Pi}e^\pi_a</script><h4 id="2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking"><a href="#2-1-2-Measuring-Author-Relevance-for-a-Single-Ranking" class="headerlink" title="2.1.2 Measuring Author Relevance for a Single Ranking"></a>2.1.2 Measuring Author Relevance for a Single Ranking</h4><p>&#160;&#160;&#160;&#160;上一节是衡量对于作者的曝光度，这一节主要考虑作者的相关性。什么叫作者的相关性呢，它是衡量作者论文在排序中的相关性之和，也就是对作者论文重要性的考量。</p>
+<script type="math/tex; mode=display">r^\pi_a=\sum_{d\in D_a}p(s|d)</script><p>&#160;&#160;&#160;&#160;$r_a^\pi$是排序$\pi$中作者a所有文章相关性的求和。</p>
+<h4 id="2-1-3-Measuring-Group-Fairness"><a href="#2-1-3-Measuring-Group-Fairness" class="headerlink" title="2.1.3 Measuring Group Fairness"></a>2.1.3 Measuring Group Fairness</h4><p>&#160;&#160;&#160;&#160;上面给出了单个作者的exposure和relevance，每个作者都有从属于的group，按group累加作者的fairness以及relevance就能分别得到group的exposure和relevance。</p>
+<script type="math/tex; mode=display">\epsilon_g=\frac{\sum_{a\in A_g}e_a}{\sum_{g'\in G}\sum_{a\in A_{g'}}e_a}</script><script type="math/tex; mode=display">R_g=\frac{\sum_{a\in A_g}r_a}{\sum_{g'\in G}\sum_{a\in A_{g'}}r_a}</script><p>&#160;&#160;&#160;&#160;所谓公平，就是让不同group的$\epsilon_g$和$R_g$差距尽可能一致。</p>
+<script type="math/tex; mode=display">\Delta_g=|\epsilon_g-R_g|</script><p>&#160;&#160;&#160;最后对所有group求一个Gini coefficient</p>
+<p>$\Delta=\frac{\sum_{g,g’\in G}|\Delta_g-\Delta_{g’}|}{2|G|\sum_{g\in G}\Delta_g}$</p>
+<h3 id="2-2-Measuring-Relevance"><a href="#2-2-Measuring-Relevance" class="headerlink" title="2.2 Measuring Relevance"></a>2.2 Measuring Relevance</h3><p>&#160;&#160;前面按group计算了exposure，这一节给出相关性$u_a^\pi$的计算。和$e_a^\pi$的公式几乎一样，就是把指示函数换成$p(s|\pi_i)$。</p>
+<script type="math/tex; mode=display">u_a^\pi=\sum^n_{i=1}[\gamma^{i-1}\Pi^{i-1}_{j=1}(1-p(s|\pi_j))]p(s|\pi_i)</script><script type="math/tex; mode=display">U=\frac{1}{\Pi}\sum_{\pi\in \Pi}u^\pi</script><p>2.3 Trading Off Fairness and Relevance</p>
+<p>&#160;&#160;&#160;&#160;按作者给的文档原话说，理论上fairness和relevance能够达到最优，但是实际操作上，可能往往提高fairness会降低relevance。所以最终要按一定比例寻求一个平衡。</p>
+
+            
+            </br>
+            <p>本文链接：
+                <a href="http://yoursite.com/2019/08/17/trec2019-fair-ranking-track/">
+                    http://yoursite.com/2019/08/17/trec2019-fair-ranking-track/
+                </a>
+            </p>
+            
+            <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+            <div class="post-info">
+
+                <p>转载请注明出处 署名-非商业性使用-禁止演绎 3.0 国际（CC BY-NC-ND 3.0）</p>
+            </div>
+            
+        </div>
+
+        
+    </div>
+    
+        <div id="socialShare" style="margin-left:40px;display:none;">
+</div>
+<script>
+    $(function () {
+        var width = document.body.scrollWidth;
+        if (width > 550) {
+            $("#socialShare").css("display", "block");
+            $("#socialShare").socialShare({
+                content: 'Nice!不错的资源...',
+                url: window.location.href,
+                titile: ''
+            });
+        }
+    });
+</script>
+    
+    
+        
+            <div class="donateContainer">
+    <div>如果文章对您有用请随意打赏，谢谢支持！</div>
+    <span id="donate" class="donate" onclick="donate()">打赏</span>
+    <div id="QR" style="display: none;">
+
+        <div id="alipay" style="display: inline-block">
+            <a href="http://kiritor.github.io/img/weixin.jpg" class="fancybox fancybox.image" rel="group">
+                <img id="alipay_qr" src="http://kiritor.github.io/img/weixin.JPG">
+            </a>
+
+        </div>
+        <div id="wechat" style="display: inline-block">
+            <a href="http://kiritor.github.io/img/zhifubao.jpg" class="fancybox fancybox.image" rel="group">
+                <img id="wechat_qr" src="http://kiritor.github.io/img/zhifubao.JPG">
+            </a>
+
+        </div>
+    </div>
+    <script>
+        function donate() {
+            var qr = document.getElementById('QR');
+            if (qr.style.display === 'none') {
+                qr.style.display = 'block';
+            } else {
+                qr.style.display = 'none'
+            }
+
+        };
+    </script>
+</div>
+        
+    
+    
+        
+
+        
+            
+                <div id="vcomments" style="margin: auto 30px auto 30px;"></div>
+<script>
+    new Valine({
+        av: AV,
+        el: '#vcomments',
+        appId: 'lxxWlIzQxwQ6sYeozabbQN2e-gzGzoHsz',
+        appKey: 'PQ3KTORxjUaJf9oRo5dfXmUr',
+        placeholder: '快来说点什么吧!',
+        emoticon_url: 'https://cloud.panjunwen.com/alu',
+        emoticon_list: ["狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","暗地观察.png"],
+        notify: false,
+        verify: false
+    })
+</script>
+            
+        
+    
+
+</article>
+
+
+<script>
+    var isMobile = {
+        Android: function () {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function () {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function () {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function () {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function () {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function () {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() ||
+                isMobile.Windows());
+        }
+    };
+    if (isMobile.any()) {
+        //移动端不显示目录和评论
+        $("#toc-button").css("display", "none");
+        $("#commentDiv").css("display", "none");
+    }
+</script>
+</div>
+      <!--
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2019 HaopengZhang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/kiritor/hexo-theme-yilia-l" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','m5RW4BUQrJ_r-CYKAksH','2.0.0');
+</script>
+  </div>
+</footer>
+-->
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/mobile.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/prefixfree.js"></script>
+
+
+
+
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;z-index:9999;opacity: 100%;">
+    <a title="返回顶部" style="opacity: 100%;">
+        <img src="/img/scrollup.png" />
+    </a>
+</div>
+
+<script src="/js/totop.js"></script>
+<script src="/js/share.js"></script>
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body>
+</html>
